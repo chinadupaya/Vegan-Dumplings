@@ -113,40 +113,40 @@ Then update `./server.js`:
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-+const Chatkit = require('@pusher/chatkit-server')
+ const Chatkit = require('@pusher/chatkit-server')
 
 const app = express()
 
-+const chatkit = new Chatkit.default({
-+  instanceLocator: 'YOUR INSTANCE LOCATOR',
-+  key: 'YOUR KEY',
-+})
+ const chatkit = new Chatkit.default({
+   instanceLocator: 'YOUR INSTANCE LOCATOR',
+   key: 'YOUR KEY',
+ })
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
 
-+app.post('/users', (req, res) => {
-+  const { username } = req.body
-+  chatkit
-+    .createUser({
-+      id: username,
-+      name: username
-+    })
-+    .then(() => res.sendStatus(201))
-+    .catch(error => {
-+      if (error.error === 'services/chatkit/user_already_exists') {
-+        res.sendStatus(200)
-+      } else {
-+        res.status(error.status).json(error)
-+      }
-+    })
-+})
+ app.post('/users', (req, res) => {
+   const { username } = req.body
+   chatkit
+     .createUser({
+       id: username,
+       name: username
+     })
+     .then(() => res.sendStatus(201))
+     .catch(error => {
+       if (error.error === 'services/chatkit/user_already_exists') {
+         res.sendStatus(200)
+       } else {
+         res.status(error.status).json(error)
+       }
+     })
+ })
 
-+app.post('/authenticate', (req, res) => {
-+  const authData = chatkit.authenticate({ userId: req.query.user_id })
-+  res.status(authData.status).send(authData.body)
-+})
+ app.post('/authenticate', (req, res) => {
+   const authData = chatkit.authenticate({ userId: req.query.user_id })
+   res.status(authData.status).send(authData.body)
+ })
 
 
 const PORT = 3001
@@ -179,83 +179,83 @@ Once they hit **Submit**, we'll send their username to the server (to the `/user
 To collect the user's name, create a component called `UsernameForm.js` in in `./src/components/`:
 
 ```diff
-+import React, { Component } from 'react'
+ import React, { Component } from 'react'
 
-+class UsernameForm extends Component {
-+ constructor(props) {
-+   super(props)
-+   this.state = {
-+     username: '',
-+   }
-+   this.onSubmit = this.onSubmit.bind(this)
-+   this.onChange = this.onChange.bind(this)
-+ }
+ class UsernameForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: '',
+    }
+    this.onSubmit = this.onSubmit.bind(this)
+    this.onChange = this.onChange.bind(this)
+  }
 
-+ onSubmit(e) {
-+   e.preventDefault()
-+   this.props.onSubmit(this.state.username)
-+ }
+  onSubmit(e) {
+    e.preventDefault()
+    this.props.onSubmit(this.state.username)
+  }
 
-+ onChange(e) {
-+    this.setState({ username: e.target.value })
-+  }
-+
-+  render() {
-+    return (
-+      <div>
-+        <div>
-+          <h2>What is your username?</h2>
-+          <form onSubmit={this.onSubmit}>
-+            <input
-+              type="text"
-+              placeholder="Your full name"
-+              onChange={this.onChange}
-+            />
-+            <input type="submit" />
-+          </form>
-+        </div>
-+      </div>
-+    )
-+  }
-+}
-+
-+ export default UsernameForm
+  onChange(e) {
+     this.setState({ username: e.target.value })
+   }
+ 
+   render() {
+     return (
+       <div>
+         <div>
+           <h2>What is your username?</h2>
+           <form onSubmit={this.onSubmit}>
+             <input
+               type="text"
+               placeholder="Your full name"
+               onChange={this.onChange}
+             />
+             <input type="submit" />
+           </form>
+         </div>
+       </div>
+     )
+   }
+ }
+ 
+  export default UsernameForm
 ```
 
 Then update `App.js`:
 
 ```diff
 import React, { Component } from 'react'
-+import UsernameForm from './components/UsernameForm'
+ import UsernameForm from './components/UsernameForm'
 
 class App extends Component {
-+  constructor() {
-+    super()
-+    this.state = {
-+      currentUsername: '',
-+    }
-+    this.onUsernameSubmitted = this.onUsernameSubmitted.bind(this)
-+  }
+   constructor() {
+     super()
+     this.state = {
+       currentUsername: '',
+     }
+     this.onUsernameSubmitted = this.onUsernameSubmitted.bind(this)
+   }
 
-+  onUsernameSubmitted(username) {
-+    fetch('http://localhost:3001/users', {
-+      method: 'POST',
-+      headers: {
-+        'Content-Type': 'application/json',
-+      },
-+      body: JSON.stringify({ username }),
-+    })
-+      .then(response => {
-+        this.setState({
-+          currentUsername: username
-+        })
-+      })
-+      .catch(error => console.error('error', error))
-+  }
+   onUsernameSubmitted(username) {
+     fetch('http://localhost:3001/users', {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({ username }),
+     })
+       .then(response => {
+         this.setState({
+           currentUsername: username
+         })
+       })
+       .catch(error => console.error('error', error))
+   }
 
   render() {
 -   return <h1>Chatly</h1>
-+   return <UsernameForm onSubmit={this.onUsernameSubmitted} />
+    return <UsernameForm onSubmit={this.onUsernameSubmitted} />
   }
 }
 
@@ -283,19 +283,19 @@ To do that, we first need to create a `ChatScreen.js` component in `./src`:
 
 
 ```diff
-+import React, { Component } from 'react'
-+
-+class ChatScreen extends Component {
-+  render() {
-+    return (
-+      <div>
-+        <h1>Chat</h1>
-+      </div>
-+    )
-+  }
-+}
-+
-+export default ChatScreen
+ import React, { Component } from 'react'
+ 
+ class ChatScreen extends Component {
+   render() {
+     return (
+       <div>
+         <h1>Chat</h1>
+       </div>
+     )
+   }
+ }
+ 
+ export default ChatScreen
 ```
 
 Then update `App.js`:
@@ -303,14 +303,14 @@ Then update `App.js`:
 ```diff
 import React, { Component } from 'react'
 import UsernameForm from './components/UsernameForm'
-+import ChatScreen from './ChatScreen'
+ import ChatScreen from './ChatScreen'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       currentUsername: '',
-+     currentScreen: 'WhatIsYourUsernameScreen'
+      currentScreen: 'WhatIsYourUsernameScreen'
     }
     this.onUsernameSubmitted = this.onUsernameSubmitted.bind(this)
  }
@@ -326,19 +326,19 @@ class App extends Component {
       .then(response => {
         this.setState({
           currentUsername: username,
-+         currentScreen: 'ChatScreen'
+          currentScreen: 'ChatScreen'
         })
       })
       .catch(error => console.error('error', error))
   }
 
  render() {
-+    if (this.state.currentScreen === 'WhatIsYourUsernameScreen') {
+     if (this.state.currentScreen === 'WhatIsYourUsernameScreen') {
       return <UsernameForm onSubmit={this.onUsernameSubmitted} />
-+    }
-+    if (this.state.currentScreen === 'ChatScreen') {
-+      return <ChatScreen currentUsername={this.state.currentUsername} />
-+    }
+     }
+     if (this.state.currentScreen === 'ChatScreen') {
+       return <ChatScreen currentUsername={this.state.currentUsername} />
+     }
   }
 }
 
@@ -359,32 +359,32 @@ Then update `ChatScreen.js`:
 
 ```diff
 import React, { Component } from 'react'
-+import Chatkit from '@pusher/chatkit-client'
+ import Chatkit from '@pusher/chatkit-client'
 
 class ChatScreen extends Component {
-+  constructor(props) {
-+    super(props)
-+    this.state = {
-+      currentUser: {}
-+    }
-+  }
+   constructor(props) {
+     super(props)
+     this.state = {
+       currentUser: {}
+     }
+   }
 
-+  componentDidMount () {
-+    const chatManager = new Chatkit.ChatManager({
-+      instanceLocator: 'YOUR INSTANCE LOCATOR',
-+      userId: this.props.currentUsername,
-+      tokenProvider: new Chatkit.TokenProvider({
-+        url: 'http://localhost:3001/authenticate',
-+      }),
-+    })
-+
-+    chatManager
-+      .connect()
-+      .then(currentUser => {
-+        this.setState({ currentUser })
-+     })
-+     .catch(error => console.error('error', error))
-+  }
+   componentDidMount () {
+     const chatManager = new Chatkit.ChatManager({
+       instanceLocator: 'YOUR INSTANCE LOCATOR',
+       userId: this.props.currentUsername,
+       tokenProvider: new Chatkit.TokenProvider({
+         url: 'http://localhost:3001/authenticate',
+       }),
+     })
+ 
+     chatManager
+       .connect()
+       .then(currentUser => {
+         this.setState({ currentUser })
+      })
+      .catch(error => console.error('error', error))
+   }
 
   render() {
     return (
@@ -469,43 +469,43 @@ class ChatScreen extends Component {
 -        <h1>Chat</h1>
 -      </div>
 -    )
-+    const styles = {
-+      container: {
-+        height: '100vh',
-+        display: 'flex',
-+        flexDirection: 'column',
-+      },
-+      chatContainer: {
-+        display: 'flex',
-+        flex: 1,
-+      },
-+      whosOnlineListContainer: {
-+        width: '300px',
-+        flex: 'none',
-+        padding: 20,
-+        backgroundColor: '#2c303b',
-+        color: 'white',
-+      },
-+      chatListContainer: {
-+        padding: 20,
-+        width: '85%',
-+        display: 'flex',
-+        flexDirection: 'column',
-+      },
-+   }
+     const styles = {
+       container: {
+         height: '100vh',
+         display: 'flex',
+         flexDirection: 'column',
+       },
+       chatContainer: {
+         display: 'flex',
+         flex: 1,
+       },
+       whosOnlineListContainer: {
+         width: '300px',
+         flex: 'none',
+         padding: 20,
+         backgroundColor: '#2c303b',
+         color: 'white',
+       },
+       chatListContainer: {
+         padding: 20,
+         width: '85%',
+         display: 'flex',
+         flexDirection: 'column',
+       },
+    }
 
-+    return (
-+      <div style={styles.container}>
-+        <div style={styles.chatContainer}>
-+          <aside style={styles.whosOnlineListContainer}>
-+            <h2>Who's online PLACEHOLDER</h2>
-+          </aside>
-+          <section style={styles.chatListContainer}>
-+            <h2>Chat PLACEHOLDER</h2>
-+          </section>
-+        </div>
-+      </div>
-+    )
+     return (
+       <div style={styles.container}>
+         <div style={styles.chatContainer}>
+           <aside style={styles.whosOnlineListContainer}>
+             <h2>Who's online PLACEHOLDER</h2>
+           </aside>
+           <section style={styles.chatListContainer}>
+             <h2>Chat PLACEHOLDER</h2>
+           </section>
+         </div>
+       </div>
+     )
   }
 }
 
@@ -528,50 +528,50 @@ First, create a stateless `MessageList.js` component in `./src/components`:
 
 
 ```diff
-+ import React, { Component } from 'react'
-+
-+ class MessagesList extends Component {
-+   render() {
-+     const styles = {
-+       container: {
-+         overflowY: 'scroll',
-+         flex: 1,
-+       },
-+       ul: {
-+         listStyle: 'none',
-+       },
-+       li: {
-+         marginTop: 13,
-+         marginBottom: 13,
-+       },
-+       senderUsername: {
-+         fontWeight: 'bold',
-+       },
-+       message: { fontSize: 15 },
-+     }
-+     return (
-+       <div
-+         style={{
-+           ...this.props.style,
-+           ...styles.container,
-+         }}
-+       >
-+         <ul style={styles.ul}>
-+           {this.props.messages.map((message, index) => (
-+             <li key={index} style={styles.li}>
-+               <div>
-+                 <span style={styles.senderUsername}>{message.senderId}</span>{' '}
-+               </div>
-+               <p style={styles.message}>{message.text}</p>
-+             </li>
-+           ))}
-+         </ul>
-+       </div>
-+     )
-+   }
-+ }
-+
-+ export default MessagesList
+  import React, { Component } from 'react'
+ 
+  class MessagesList extends Component {
+    render() {
+      const styles = {
+        container: {
+          overflowY: 'scroll',
+          flex: 1,
+        },
+        ul: {
+          listStyle: 'none',
+        },
+        li: {
+          marginTop: 13,
+          marginBottom: 13,
+        },
+        senderUsername: {
+          fontWeight: 'bold',
+        },
+        message: { fontSize: 15 },
+      }
+      return (
+        <div
+          style={{
+            ...this.props.style,
+            ...styles.container,
+          }}
+        >
+          <ul style={styles.ul}>
+            {this.props.messages.map((message, index) => (
+              <li key={index} style={styles.li}>
+                <div>
+                  <span style={styles.senderUsername}>{message.senderId}</span>{' '}
+                </div>
+                <p style={styles.message}>{message.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  }
+ 
+  export default MessagesList
 ```
 
 Then update `ChatScreen.js`:
@@ -579,7 +579,7 @@ Then update `ChatScreen.js`:
 ```diff
 import React, { Component } from 'react'
 import Chatkit from '@pusher/chatkit-client'
-+import MessageList from './components/MessageList'
+ import MessageList from './components/MessageList'
 
 
 class ChatScreen extends Component {
@@ -587,8 +587,8 @@ class ChatScreen extends Component {
     super(props)
     this.state = {
       currentUser: {},
-+     currentRoom: {},
-+     messages: []
+      currentRoom: {},
+      messages: []
     }
   }
 
@@ -605,21 +605,21 @@ class ChatScreen extends Component {
       .connect()
       .then(currentUser => {
         this.setState({ currentUser })
-+        return currentUser.subscribeToRoom({
-+          roomId: "YOUR ROOM ID",
-+          messageLimit: 100,
-+          hooks: {
-+            onMessage: message => {
-+              this.setState({
-+                messages: [...this.state.messages, message],
-+              })
-+            },
-+          },
-+        })
-+      })
-+      .then(currentRoom => {
-+        this.setState({ currentRoom })
-+       })
+         return currentUser.subscribeToRoom({
+           roomId: "YOUR ROOM ID",
+           messageLimit: 100,
+           hooks: {
+             onMessage: message => {
+               this.setState({
+                 messages: [...this.state.messages, message],
+               })
+             },
+           },
+         })
+       })
+       .then(currentRoom => {
+         this.setState({ currentRoom })
+        })
       .catch(error => console.error('error', error))
   }
 
@@ -635,10 +635,10 @@ class ChatScreen extends Component {
           </aside>
           <section style={styles.chatListContainer}>
 -            <h2>Chat PLACEHOLDER</h2>
-+            <MessageList
-+              messages={this.state.messages}
-+              style={styles.chatList}
-+            />
+             <MessageList
+               messages={this.state.messages}
+               style={styles.chatList}
+             />
           </section>
         </div>
       </div>
@@ -667,69 +667,69 @@ We're on a roll!
 Next, let's allow users to send messages by first creating a `SendMessageForm.js` component in `./src/components`:
 
 ```diff
-+ import React, { Component } from 'react'
-+
-+ class SendMessageForm extends Component {
-+   constructor(props) {
-+     super(props)
-+     this.state = {
-+       text: '',
-+     }
-+     this.onSubmit = this.onSubmit.bind(this)
-+     this.onChange = this.onChange.bind(this)
-+   }
-+
-+   onSubmit(e) {
-+     e.preventDefault()
-+     this.props.onSubmit(this.state.text)
-+     this.setState({ text: '' })
-+   }
-+
-+   onChange(e) {
-+     this.setState({ text: e.target.value })
-+     if (this.props.onChange) {
-+       this.props.onChange()
-+     }
-+   }
-+
-+   render() {
-+     const styles = {
-+       container: {
-+         padding: 20,
-+         borderTop: '1px #4C758F solid',
-+         marginBottom: 20,
-+       },
-+       form: {
-+         display: 'flex',
-+       },
-+       input: {
-+         color: 'inherit',
-+         background: 'none',
-+         outline: 'none',
-+         border: 'none',
-+         flex: 1,
-+         fontSize: 16,
-+       },
-+     }
-+     return (
-+       <div style={styles.container}>
-+         <div>
-+           <form onSubmit={this.onSubmit} style={styles.form}>
-+             <input
-+               type="text"
-+               placeholder="Type a message here then hit ENTER"
-+               onChange={this.onChange}
-+               value={this.state.text}
-+               style={styles.input}
-+             />
-+           </form>
-+         </div>
-+       </div>
-+     )
-+   }
-+ }
-+
-+ export default SendMessageForm
+  import React, { Component } from 'react'
+ 
+  class SendMessageForm extends Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        text: '',
+      }
+      this.onSubmit = this.onSubmit.bind(this)
+      this.onChange = this.onChange.bind(this)
+    }
+ 
+    onSubmit(e) {
+      e.preventDefault()
+      this.props.onSubmit(this.state.text)
+      this.setState({ text: '' })
+    }
+ 
+    onChange(e) {
+      this.setState({ text: e.target.value })
+      if (this.props.onChange) {
+        this.props.onChange()
+      }
+    }
+ 
+    render() {
+      const styles = {
+        container: {
+          padding: 20,
+          borderTop: '1px #4C758F solid',
+          marginBottom: 20,
+        },
+        form: {
+          display: 'flex',
+        },
+        input: {
+          color: 'inherit',
+          background: 'none',
+          outline: 'none',
+          border: 'none',
+          flex: 1,
+          fontSize: 16,
+        },
+      }
+      return (
+        <div style={styles.container}>
+          <div>
+            <form onSubmit={this.onSubmit} style={styles.form}>
+              <input
+                type="text"
+                placeholder="Type a message here then hit ENTER"
+                onChange={this.onChange}
+                value={this.state.text}
+                style={styles.input}
+              />
+            </form>
+          </div>
+        </div>
+      )
+    }
+  }
+ 
+  export default SendMessageForm
 ```
 
 Then - you guessed it - update `ChatScreen.js`:
@@ -738,7 +738,7 @@ Then - you guessed it - update `ChatScreen.js`:
 import React, { Component } from 'react'
 import Chatkit from '@pusher/chatkit-client'
 import MessageList from './components/MessageList'
-+ import SendMessageForm from './components/SendMessageForm'
+  import SendMessageForm from './components/SendMessageForm'
 
 class ChatScreen extends Component {
   constructor(props) {
@@ -748,16 +748,16 @@ class ChatScreen extends Component {
       currentRoom: {},
       messages: []
     }
-+    this.sendMessage = this.sendMessage.bind(this)
+     this.sendMessage = this.sendMessage.bind(this)
   }
 
 
-+  sendMessage(text) {
-+    this.state.currentUser.sendMessage({
-+      text,
-+      roomId: this.state.currentRoom.id,
-+    })
-+  }
+   sendMessage(text) {
+     this.state.currentUser.sendMessage({
+       text,
+       roomId: this.state.currentRoom.id,
+     })
+   }
 
  componentDidMount () {
     const chatManager = new Chatkit.ChatManager({
@@ -806,7 +806,7 @@ class ChatScreen extends Component {
               messages={this.state.messages}
               style={styles.chatList}
             />
-+           <SendMessageForm onSubmit={this.sendMessage} />
+            <SendMessageForm onSubmit={this.sendMessage} />
           </section>
         </div>
       </div>
@@ -835,24 +835,24 @@ With Chatkit, you can add typing indicators with little effort.
 Start by creating a  `TypingIndicator.js` component in `./src/components`:
 
 ```diff
-+import React, { Component } from 'react'
-+
-+class TypingIndicator extends Component {
-+  render() {
-+    if (this.props.usersWhoAreTyping.length > 0) {
-+      return (
-+        <div>
-+          {`${this.props.usersWhoAreTyping
-+            .slice(0, 2)
-+            .join(' and ')} is typing`}
-+        </div>
-+      )
-+    }
-+    return <div />
-+  }
-+}
-+
-+export default TypingIndicator
+ import React, { Component } from 'react'
+ 
+ class TypingIndicator extends Component {
+   render() {
+     if (this.props.usersWhoAreTyping.length > 0) {
+       return (
+         <div>
+           {`${this.props.usersWhoAreTyping
+             .slice(0, 2)
+             .join(' and ')} is typing`}
+         </div>
+       )
+     }
+     return <div />
+   }
+ }
+ 
+ export default TypingIndicator
 ```
 
 Then update `ChatScreen.js`:
@@ -862,7 +862,7 @@ import React, { Component } from 'react'
 import Chatkit from '@pusher/chatkit-client'
 import MessageList from './components/MessageList'
 import SendMessageForm from './components/SendMessageForm'
-+import TypingIndicator from './components/TypingIndicator'
+ import TypingIndicator from './components/TypingIndicator'
 
 class ChatScreen extends Component {
   constructor(props) {
@@ -871,17 +871,17 @@ class ChatScreen extends Component {
       currentUser: {},
       currentRoom: {},
       messages: [],
-+     usersWhoAreTyping: [],
+      usersWhoAreTyping: [],
     }
     this.sendMessage = this.sendMessage.bind(this)
-+   this.sendTypingEvent = this.sendTypingEvent.bind(this)
+    this.sendTypingEvent = this.sendTypingEvent.bind(this)
   }
 
-+  sendTypingEvent() {
-+    this.state.currentUser
-+      .isTypingIn({ roomId: this.state.currentRoom.id })
-+      .catch(error => console.error('error', error))
-+  }
+   sendTypingEvent() {
+     this.state.currentUser
+       .isTypingIn({ roomId: this.state.currentRoom.id })
+       .catch(error => console.error('error', error))
+   }
 
   sendMessage(text) {
     this.state.currentUser.sendMessage({
@@ -912,18 +912,18 @@ class ChatScreen extends Component {
                 messages: [...this.state.messages, message],
               })
             },
-+            onUserStartedTyping: user => {
-+              this.setState({
-+                usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name],
-+             })
-+            },
-+            onUserStoppedTyping: user => {
-+              this.setState({
-+                usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
-+                  username => username !== user.name
-+                ),
-+              })
-+            },
+             onUserStartedTyping: user => {
+               this.setState({
+                 usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name],
+              })
+             },
+             onUserStoppedTyping: user => {
+               this.setState({
+                 usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
+                   username => username !== user.name
+                 ),
+               })
+             },
           },
         })
       })
@@ -948,10 +948,10 @@ class ChatScreen extends Component {
               messages={this.state.messages}
               style={styles.chatList}
             />
-+           <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
+            <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
             <SendMessageForm
               onSubmit={this.sendMessage}
-+             onChange={this.sendTypingEvent}
+              onChange={this.sendTypingEvent}
             />
           </section>
         </div>
@@ -986,73 +986,73 @@ To finish up the chat app, let's use Chatkit's "who's online" feature to render 
 Start by creating a `WhosOnlineList.js` component in `/src/components`:
 
 ```diff
-+import React, { Component } from 'react'
-+
-+class WhosOnlineList extends Component {
-+  renderUsers() {
-+    return (
-+      <ul>
-+        {this.props.users.map((user, index) => {
-+          if (user.id === this.props.currentUser.id) {
-+            return (
-+              <WhosOnlineListItem key={index} presenceState="online">
-+                {user.name} (You)
-+              </WhosOnlineListItem>
-+            )
-+          }
-+          return (
-+            <WhosOnlineListItem key={index} presenceState={user.presence.state}>
-+              {user.name}
-+            </WhosOnlineListItem>
-+          )
-+        })}
-+      </ul>
-+    )
-+  }
-+
-+  render() {
-+    if (this.props.users) {
-+      return this.renderUsers()
-+    } else {
-+      return <p>Loading...</p>
-+    }
-+  }
-+}
-+
-+class WhosOnlineListItem extends Component {
-+  render() {
-+    const styles = {
-+      li: {
-+        display: 'flex',
-+        alignItems: 'center',
-+        marginTop: 5,
-+        marginBottom: 5,
-+        paddingTop: 2,
-+        paddingBottom: 2,
-+      },
-+      div: {
-+        borderRadius: '50%',
-+        width: 11,
-+        height: 11,
-+        marginRight: 10,
-+      },
-+    }
-+    return (
-+      <li style={styles.li}>
-+        <div
-+          style={{
-+            ...styles.div,
-+            backgroundColor:
-+              this.props.presenceState === 'online' ? '#539eff' : '#414756',
-+          }}
-+        />
-+        {this.props.children}
-+      </li>
-+    )
-+  }
-+}
-+
-+export default WhosOnlineList
+ import React, { Component } from 'react'
+ 
+ class WhosOnlineList extends Component {
+   renderUsers() {
+     return (
+       <ul>
+         {this.props.users.map((user, index) => {
+           if (user.id === this.props.currentUser.id) {
+             return (
+               <WhosOnlineListItem key={index} presenceState="online">
+                 {user.name} (You)
+               </WhosOnlineListItem>
+             )
+           }
+           return (
+             <WhosOnlineListItem key={index} presenceState={user.presence.state}>
+               {user.name}
+             </WhosOnlineListItem>
+           )
+         })}
+       </ul>
+     )
+   }
+ 
+   render() {
+     if (this.props.users) {
+       return this.renderUsers()
+     } else {
+       return <p>Loading...</p>
+     }
+   }
+ }
+ 
+ class WhosOnlineListItem extends Component {
+   render() {
+     const styles = {
+       li: {
+         display: 'flex',
+         alignItems: 'center',
+         marginTop: 5,
+         marginBottom: 5,
+         paddingTop: 2,
+         paddingBottom: 2,
+       },
+       div: {
+         borderRadius: '50%',
+         width: 11,
+         height: 11,
+         marginRight: 10,
+       },
+     }
+     return (
+       <li style={styles.li}>
+         <div
+           style={{
+             ...styles.div,
+             backgroundColor:
+               this.props.presenceState === 'online' ? '#539eff' : '#414756',
+           }}
+         />
+         {this.props.children}
+       </li>
+     )
+   }
+ }
+ 
+ export default WhosOnlineList
 ```
 
 Then - for the last time 😢👋 - update `ChatScreen.js`:
@@ -1064,7 +1064,7 @@ import Chatkit from '@pusher/chatkit-client'
 import MessageList from './components/MessageList'
 import SendMessageForm from './components/SendMessageForm'
 import TypingIndicator from './components/TypingIndicator'
-+import WhosOnlineList from './components/WhosOnlineList'
+ import WhosOnlineList from './components/WhosOnlineList'
 
 class ChatScreen extends Component {
   constructor(props) {
@@ -1126,7 +1126,7 @@ class ChatScreen extends Component {
                 ),
               })
             },
-+            onPresenceChange: () => this.forceUpdate(),
+             onPresenceChange: () => this.forceUpdate(),
           },
         })
       })
@@ -1148,10 +1148,10 @@ class ChatScreen extends Component {
         <div style={styles.chatContainer}>
           <aside style={styles.whosOnlineListContainer}>
 -            <h2>Who's online PLACEHOLDER</h2>
-+            <WhosOnlineList
-+              currentUser={this.state.currentUser}
-+              users={this.state.currentRoom.users}
-+            />
+             <WhosOnlineList
+               currentUser={this.state.currentUser}
+               users={this.state.currentRoom.users}
+             />
           </aside>
           <section style={styles.chatListContainer}>
             <MessageList
@@ -1204,6 +1204,6 @@ Want to keep building? Why not add rich media support and read receipts? Chatkit
 * [Read receipts](https://docs.pusher.com/chatkit/reference/javascript#cursors)
 * [File API](https://docs.pusher.com/chatkit/reference/javascript#attachment)
 
-You may also be interested in checking out [our powerful Chatkit Slack demo](https://github.com/pusher/react-slack-clone) ([250+ stars ⭐️](https://github.com/pusher/react-slack-clone/stargazers)). It’s similar to the application we just built but more complete.
+You may also be interested in checking out [our powerful Chatkit Slack demo](https://github.com/pusher/react-slack-clone) ([250  stars ⭐️](https://github.com/pusher/react-slack-clone/stargazers)). It’s similar to the application we just built but more complete.
 
 **What will you build with Chatkit? We'd love to see! Your feedback guides us in improving Chatkit. Let us know what helps you reach your goals, what’s getting in your way, or what’s missing.**
