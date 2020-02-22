@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import UsernameForm from './components/UsernameForm';
 import ChatScreen from './ChatScreen';
 import UserHome from './UserHome';
-import UserNavbar from './components/UserNavbar'
+import UserNavbar from './components/UserNavbar';
+import TeacherHome from './components/TeacherHome';
 import {
   BrowserRouter as Router,
   Switch,
@@ -40,7 +41,7 @@ class App extends Component {
       <UserNavbar/>
       <Switch>
         <Route exact path="/">landing</Route>
-        
+        <Route path ="/teacher-home"><TeacherHome/></Route>
         <Route path ="/home" ><UserHome/></Route>
         <Route path="/chat"><ChatScreen currentUsername={this.state.currentUsername} />  </Route>
           {/* render={routeProps => <ChatScreen {...routeProps} currentUsername={this.state.currentUsername}/>} />  */}
