@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import UsernameForm from './components/UsernameForm';
 import ChatScreen from './ChatScreen';
+import UserHome from './UserHome';
+import UserNavbar from './components/UserNavbar'
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,8 +13,8 @@ class App extends Component {
   constructor() {
     super()
         this.state = {
-          currentUsername: '',
-          currentScreen: 'WhatIsYourUsernameScreen'
+          currentUsername: 'chi',
+          currentScreen: 'ChatScreen'
         }
         this.onUsernameSubmitted = this.onUsernameSubmitted.bind(this)
       }
@@ -26,20 +28,25 @@ class App extends Component {
             })
               .then(response => {
                 this.setState({
-                  currentUsername: username,
+                  currentUsername: 'chi',
                   currentScreen: 'ChatScreen'
                 })
               })
               .catch(error => console.error('error', error))
           }
   render() {
-if (this.state.currentScreen === 'WhatIsYourUsernameScreen') {
-        return <UsernameForm onSubmit={this.onUsernameSubmitted} />
-      //return 
-     }
-     if (this.state.currentScreen === 'ChatScreen') {
-          return <ChatScreen currentUsername={this.state.currentUsername} />  
-     }
+    return(
+    <Router>
+      <UserNavbar/>
+      <Switch>
+        <Route exact path="/">landing</Route>
+        
+        <Route path ="/home" ><UserHome/></Route>
+        <Route path="/chat"><ChatScreen currentUsername={this.state.currentUsername} />  </Route>
+          {/* render={routeProps => <ChatScreen {...routeProps} currentUsername={this.state.currentUsername}/>} />  */}
+      </Switch>
+    </Router>
+    )
 
 /*     if (this.state.currentScreen === 'WhatIsYourUsernameScreen') {
         return <UsernameForm onSubmit={this.onUsernameSubmitted} />

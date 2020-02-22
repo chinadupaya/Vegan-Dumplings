@@ -17,7 +17,7 @@ import UserHome from './UserHome';
     constructor(props) {
             super(props)
             this.state = {
-            currentUser: {},
+            currentUser: 'chi',
             currentRoom: {},
             messages: [],
             usersWhoAreTyping: []
@@ -40,7 +40,7 @@ import UserHome from './UserHome';
         componentDidMount () {
             const chatManager = new Chatkit.ChatManager({
             instanceLocator: 'v1:us1:75a24fdd-7665-4f60-93bc-1f0917db2f37',
-            userId: this.props.currentUsername,
+            userId: 'chi',//this.state.currentUsername,
             tokenProvider: new Chatkit.TokenProvider({
                 url: 'http://localhost:3001/authenticate',
             }),
@@ -108,10 +108,6 @@ import UserHome from './UserHome';
             }
         
              return (
-               <Router>
-                <UserNavbar/>
-                 <Switch>
-                   <Route exact path="/chat">
                     <div style={styles.container}>
                       <div style={styles.chatContainer}>
                         <aside style={styles.whosOnlineListContainer}>
@@ -132,12 +128,6 @@ import UserHome from './UserHome';
                         </section>
                       </div>
                     </div>
-                   </Route>
-                   <Route path="/home">
-                      <UserHome/>
-                   </Route>
-                 </Switch>
-               </Router>
                
              )
    }

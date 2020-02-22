@@ -13,7 +13,7 @@ class UsernameForm extends Component {
 
   onSubmit(e) {
     e.preventDefault()
-    this.props.onSubmit(this.state.username)
+    this.props.onSubmit('chi')
   }
 
   onChange(e) {
@@ -24,7 +24,6 @@ class UsernameForm extends Component {
     return (
       <div>
         <div>
-        <Button variant="primary">haksjfhaksdlj</Button>
           <h2>What is your username?</h2>
           <form onSubmit={this.onSubmit}>
             <input
