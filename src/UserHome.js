@@ -1,11 +1,13 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
-
+import './stylesheets/UserHome.css';
 export default function UserHome(){
     return(
 
         <div className = "UserHome">
             <h3>Juan Dela Cruz</h3>
+            <p className="text-muted">Xavier School | 9-St. Andrew</p>
+            <hr/>
             <h5>My Channels</h5>
             <Card style={{ width: '18rem' }}>
             <Card.Body>

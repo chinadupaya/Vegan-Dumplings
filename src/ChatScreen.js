@@ -11,7 +11,7 @@
   Route,
   Link
 } from "react-router-dom";
-import UserHome from './UserHome';
+
  
  class ChatScreen extends Component {
     constructor(props) {
@@ -111,6 +111,7 @@ import UserHome from './UserHome';
                     <div style={styles.container}>
                       <div style={styles.chatContainer}>
                         <aside style={styles.whosOnlineListContainer}>
+                          <h4>Who's Online</h4>
                           <WhosOnlineList
                             currentUser={this.state.currentUser}
                             users={this.state.currentRoom.users}

@@ -3,6 +3,6 @@ a.navbar-brand{
     font-family: 'Odibee Sans' ;
     font-size:2rem
 }
-.UserNavbar{
-    background-color: #1ce6d2;
+a.navbar-brand::first-letter{
+    color: #1ce6d2;
 }
