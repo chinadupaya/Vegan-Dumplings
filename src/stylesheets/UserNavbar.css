@@ -28,6 +28,6 @@ a.nav-link:hover{
 	border: 3px solid red;
 }
 
-svg {
+.ml-auto svg {
   color: #1ce6d2 !important;
 }
