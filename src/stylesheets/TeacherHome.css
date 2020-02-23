@@ -8,3 +8,16 @@
 .btn{
     margin:1em;
 }
+
+.btn-info, .btn-info:hover, .btn-info:active, .btn-info:visited {
+    background-color: #000000 !important;
+    color: white !important;
+    border-radius: 0px !important;
+    border: 0px !important;
+    font-family: "Open Sans Condensed" !important;
+    margin: 1.2em !important;
+}
+
+.btn-info:hover {
+	color: #1ce6d2 !important;
+}

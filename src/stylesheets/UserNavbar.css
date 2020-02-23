@@ -27,3 +27,7 @@ a.nav-link:hover{
 .navbar-form > input {
 	border: 3px solid red;
 }
+
+svg {
+  color: #1ce6d2 !important;
+}

@@ -71,79 +71,79 @@ export default function TeacherHome(){
             </Modal>
             <Tabs defaultActiveKey="Class1" id="uncontrolled-tab-example">
                 <Tab eventKey="Class1" title="Class 1">
-                    <Button variant ="info" onClick={handleShow}>Add new channel</Button>
+                    <Button variant ="info" onClick={handleShow}>Create New Channel</Button>
                     <div class="card-container">
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
-                            <Card.Title>Superstitious beliefs</Card.Title>
+                            <Card.Title><b>Superstitious Beliefs</b></Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">CCNHS2019-9-A</Card.Subtitle>
                             
                             <Card.Text>
                             Discuss with Grade 9 students from Cebu City National Science High School on the superstitious beliefs in their community.
                             </Card.Text>
-                            <a href="/chat"><Button variant="primary">Go to chat</Button></a>
+                            <a href="/chat"><Button variant="primary">Enter Channel</Button></a>
                         </Card.Body>
                         </Card>
                         <Card style={{ width: '18rem' }}>
                         <Card.Body>
-                            <Card.Title>Family values</Card.Title>
+                            <Card.Title><b>Family Values</b></Card.Title>
 
                             <Card.Subtitle className="mb-2 text-muted">DCHS2019-8-A</Card.Subtitle>
                             <Card.Text>
                             Discuss with students from Davao City High School on their family values they believe are unique to their area.
                             </Card.Text>
-                            <Button variant="primary">Go to chat</Button>
+                            <Button variant="primary">Enter Channel</Button>
                         </Card.Body>
                         </Card>
                     </div>
                 </Tab>
                 <Tab eventKey="Class2" title="Class 2">
-                    <Button variant ="info" onClick={handleShow}>Add new channel</Button>
+                    <Button variant ="info" onClick={handleShow}>Create New Channel</Button>
                     <div class="card-container">
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
-                            <Card.Title>Superstitious beliefs</Card.Title>
+                            <Card.Title><b>Superstitious Beliefs</b></Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">CCNHS2019-9-B</Card.Subtitle>
                             <Card.Text>
                             Discuss with Grade 9 students from Cebu City National Science High School on the superstitious beliefs in their community.
                             </Card.Text>
-                            <a href="/chat"><Button variant="primary">Go to chat</Button></a>
+                            <a href="/chat"><Button variant="primary">Enter Channel</Button></a>
                         </Card.Body>
                         </Card>
                         <Card style={{ width: '18rem' }}>
                         <Card.Body>
-                            <Card.Title>Family values</Card.Title>
+                            <Card.Title><b>Family Values</b></Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">DCHS2019-8-B</Card.Subtitle>
                             <Card.Text>
                             Discuss with students from Davao City High School on their family values they believe are unique to their area.
                             </Card.Text>
-                            <Button variant="primary">Go to chat</Button>
+                            <Button variant="primary">Enter Channel</Button>
                         </Card.Body>
                         </Card>
                         </div>
                 </Tab>
                 <Tab eventKey="Class3" title="Class 3">
-                    <Button variant ="info" onClick={handleShow}>Add new channel</Button>
+                    <Button variant ="info" onClick={handleShow}>Create New Channel</Button>
                     <div class="card-container">
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
-                            <Card.Title>Superstitious beliefs</Card.Title>
+                            <Card.Title><b>Superstitious Beliefs</b></Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">CCNHS2019-9-C</Card.Subtitle>
                             <Card.Text>
                             Discuss with Grade 9 students from Cebu City National Science High School on the superstitious beliefs in their community.
                             </Card.Text>
-                            <a href="/chat"><Button variant="primary">Go to chat</Button></a>
+                            <a href="/chat"><Button variant="primary">Enter Channel</Button></a>
                         </Card.Body>
                         </Card>
                         <Card style={{ width: '18rem' }}>
                         <Card.Body>
-                            <Card.Title>Family values</Card.Title>
+                            <Card.Title><b>Family Values</b></Card.Title>
 
                             <Card.Subtitle className="mb-2 text-muted">DCHS2019-8-C</Card.Subtitle>
                             <Card.Text>
                             Discuss with students from Davao City High School on their family values they believe are unique to their area.
                             </Card.Text>
-                            <Button variant="primary">Go to chat</Button>
+                            <Button variant="primary">Enter Channel</Button>
                         </Card.Body>
                         </Card>
                         </div>

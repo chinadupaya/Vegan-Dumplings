@@ -13,7 +13,7 @@ export default function UserNavbar(){
             <Nav className="mr-auto">
                 <Nav.Link href="/home">Channels</Nav.Link>
                 <Nav.Link href="/chat"></Nav.Link>
-                <Nav.Link href="/search">Search</Nav.Link>
+                <Nav.Link href="/search">Network</Nav.Link>
             </Nav>
 
             </Navbar.Collapse>
