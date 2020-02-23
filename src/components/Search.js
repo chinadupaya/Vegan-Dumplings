@@ -41,11 +41,12 @@ export default function Search(){
             
            
             <div className="Search">
-                <h2>{ifEmpty}</h2>
+                
             <Form inline>
                 <FormControl type="text" placeholder="Search" value={searchValue} 
                  onChange={handleChange} className="mr-sm-2" />
             </Form>
+            <h2>{ifEmpty}</h2>
             <Card style={{ width: '80%', margin: 'auto 1em' }} striped>
                 <ListGroup variant="flush">
                     {resultsOut}

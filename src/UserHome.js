@@ -13,6 +13,7 @@ export default function UserHome(){
             <Card style={{ width: '18rem' }}>
             <Card.Body>
                 <Card.Title>Superstitious beliefs</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">Cebu City National Science High School</Card.Subtitle>
                 <Card.Text>
                 Discuss with Grade 9 students from Cebu City National Science High School on the superstitious beliefs in their community.
                 </Card.Text>
@@ -22,6 +23,7 @@ export default function UserHome(){
             <Card style={{ width: '18rem' }}>
             <Card.Body>
                 <Card.Title>Family values</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">Davao City High School</Card.Subtitle>
                 <Card.Text>
                 Discuss with students from Davao City High School on their family values they believe are unique to their area.
                 </Card.Text>
