@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../stylesheets/UserNavbar.css'
 import {Navbar, Nav, FormControl, Button, Form }from 'react-bootstrap';
+import {Bell} from 'react-bootstrap-icons';
 
 export default function UserNavbar(){
     return(
@@ -20,6 +21,9 @@ export default function UserNavbar(){
                 </Form>
 
             </Navbar.Collapse>
+            <Nav.Link>
+                <Bell size={30}/>
+            </Nav.Link>
             </Navbar>
         </div>
     )

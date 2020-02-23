@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Person} from 'react-bootstrap-icons';
 
 class MessagesList extends Component {
 render() {
@@ -30,7 +31,7 @@ render() {
         {this.props.messages.map((message, index) => (
             <li key={index} style={styles.li}>
             <div>
-                <span style={styles.senderUsername}>{message.senderId}</span>{' '}
+                <span style={styles.senderUsername}><Person size={20}/>{message.senderId}</span>{' '}
             </div>
             <p style={styles.message}>{message.text}</p>
             </li>

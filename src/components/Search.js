@@ -1,25 +1,54 @@
-import React from 'react';
-import {Card, ListGroup, Button} from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Card, ListGroup, Button, Form, FormControl} from 'react-bootstrap';
 import '../stylesheets/Search.css';
 export default function Search(){
+    //let searchValue = 'Davao'
+    const [searchValue, setSearchValue] = useState("");
+    const [ifEmpty, setIfEmpty] = useState("");
+    
+    let data = [
+        {
+            id:1,
+            schoolName: 'Davao Christian HIgh School',
+            section:'GRade 5 - Compassion',
+            topic:'Favorite Food'},
+        
+        {id:2, schoolName:'Salugpungan Ta Ta’nu Igkanugon Learning Center',
+            section:'Grade 12',
+            topic:'Martial Law'},
+            {id: 3, schoolName:'School of the Holy Spirit',
+                section:'Grade 12 - Kasipagan',
+                topic:'Religion'},
+    ];
 
+    const handleChange = event => {
+        setSearchValue(event.target.value);
+        setIfEmpty(event.target.value.trim() != '' ? `Results for ${event.target.value}` : "");
+      };
+
+    let results = data.filter(x => x.schoolName.includes(searchValue) || x.section.includes(searchValue) || x.topic.includes(searchValue));
+    var resultsOut = results.map((result)=>{
+        return(
+                <ListGroup.Item key={result.id}>
+                    <div className="school-name">{result.schoolName}</div>
+                    <div className="grade-section">{result.section}</div>
+                    <div>{result.topic}</div>
+                    <Button variant="info">Join Discussion</Button>
+                </ListGroup.Item>
+        )
+        })
     return(
-        <div className="Search">
-            <h2>Results for 'Mindanao'</h2>
+            
+           
+            <div className="Search">
+                <h2>{ifEmpty}</h2>
+            <Form inline>
+                <FormControl type="text" placeholder="Search" value={searchValue} 
+                 onChange={handleChange} className="mr-sm-2" />
+            </Form>
             <Card style={{ width: '80%', margin: 'auto 1em' }} striped>
                 <ListGroup variant="flush">
-                    <ListGroup.Item>
-                        <div className="school-name">Davao Christian High School</div>
-                        <div className="grade-section">Grade 5 - Compassion</div>
-                        <div>Favorite Foods</div>
-                        <Button variant="info">Join Discussion</Button>
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                        <div className="school-name">Salugpungan Ta Ta’nu Igkanugon Learning Center</div>
-                        <div className="grade-section">Grade 12</div>
-                        <div>Martial Law</div>
-                        <Button variant="info">Join Discussion</Button>
-                    </ListGroup.Item>
+                    {resultsOut}
 
                 </ListGroup>
             </Card>

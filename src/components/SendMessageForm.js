@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {CameraVideo, Image, Folder} from 'react-bootstrap-icons';
 
 class SendMessageForm extends Component {
 constructor(props) {
@@ -32,6 +33,7 @@ render() {
     },
     form: {
         display: 'flex',
+        marginBottom: 20
     },
     input: {
         color: 'inherit',
@@ -54,6 +56,7 @@ render() {
             style={styles.input}
             />
         </form>
+        <CameraVideo size={30}/> <Image size={30}/> <Folder size={30}/>
         </div>
     </div>
     )
