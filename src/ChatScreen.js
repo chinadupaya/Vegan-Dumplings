@@ -84,11 +84,12 @@
    render() {
     const styles = {
                container: {
-                 height: '100vh',
+                 height: '90vh',
                  display: 'flex',
                  flexDirection: 'column',
                },
                chatContainer: {
+                 height:'80%',
                  display: 'flex',
                  flex: 1,
                },
@@ -111,7 +112,7 @@
                     <div style={styles.container}>
                       <div style={styles.chatContainer}>
                         <aside style={styles.whosOnlineListContainer}>
-                          <h4>Superstitious beliefs</h4>
+                          <h4>Superstitious Beliefs</h4>
                           <WhosOnlineList
                             currentUser={this.state.currentUser}
                             users={this.state.currentRoom.users}

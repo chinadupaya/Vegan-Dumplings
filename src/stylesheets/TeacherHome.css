@@ -21,3 +21,14 @@
 .btn-info:hover {
 	color: #1ce6d2 !important;
 }
+
+.nav-tabs{
+  background-color: rgb(0,0,0,0.7);
+  border-radius: 0px !important;
+}
+
+.nav>li>a {
+    background-color: #666 !important;
+    color: #000;
+    border-radius: 0px !important;
+}

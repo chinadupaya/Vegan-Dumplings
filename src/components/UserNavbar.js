@@ -12,14 +12,15 @@ export default function UserNavbar(){
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
                 <Nav.Link href="/home">Channels</Nav.Link>
-                <Nav.Link href="/chat"></Nav.Link>
-                <Nav.Link href="/search">Network</Nav.Link>
+                <Nav.Link href="/search">Search</Nav.Link>
+            </Nav>
+
+            <Nav className="ml-auto">
+                <Bell size={30}/>
             </Nav>
 
             </Navbar.Collapse>
-            <Nav.Link>
-                <Bell size={30}/>
-            </Nav.Link>
+
             </Navbar>
         </div>
     )

@@ -13,9 +13,10 @@ export default function Search(){
             section:'GRade 5 - Compassion',
             topic:'Favorite Food'},
         
-        {id:2, schoolName:'Salugpungan Ta Ta’nu Igkanugon Learning Center',
+            {id:2, schoolName:'Salugpungan Ta Ta’nu Igkanugon Learning Center',
             section:'Grade 12',
             topic:'Martial Law'},
+            
             {id: 3, schoolName:'School of the Holy Spirit',
                 section:'Grade 12 - Kasipagan',
                 topic:'Religion'},
@@ -38,8 +39,7 @@ export default function Search(){
         )
         })
     return(
-            
-           
+             
             <div className="Search">
                 
             <Form inline>

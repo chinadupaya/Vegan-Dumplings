@@ -7,7 +7,7 @@ render() {
         <div>
         {`${this.props.usersWhoAreTyping
             .slice(0, 2)
-            .join(' and ')} is typing`}
+            .join(' and ')} is typing...`}
         </div>
     )
     }
