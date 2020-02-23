@@ -13,12 +13,8 @@ export default function UserNavbar(){
             <Nav className="mr-auto">
                 <Nav.Link href="/home">Channels</Nav.Link>
                 <Nav.Link href="/chat"></Nav.Link>
+                <Nav.Link href="/search">Search</Nav.Link>
             </Nav>
-
-            <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <a href="/search"><Button variant="secondary">Search</Button></a>
-                </Form>
 
             </Navbar.Collapse>
             <Nav.Link>

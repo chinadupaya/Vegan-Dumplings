@@ -1,3 +1,6 @@
 .UserHome{
     padding: 1em;
 }
+.card-container{
+    display:flex;
+}

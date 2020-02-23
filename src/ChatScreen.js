@@ -111,7 +111,7 @@
                     <div style={styles.container}>
                       <div style={styles.chatContainer}>
                         <aside style={styles.whosOnlineListContainer}>
-                          <h4>Who's Online</h4>
+                          <h4>Superstitious beliefs</h4>
                           <WhosOnlineList
                             currentUser={this.state.currentUser}
                             users={this.state.currentRoom.users}

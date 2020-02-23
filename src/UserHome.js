@@ -9,6 +9,7 @@ export default function UserHome(){
             <p className="text-muted">Xavier School | 9-St. Andrew</p>
             <hr/>
             <h5>My Channels</h5>
+            <div className="card-container">
             <Card style={{ width: '18rem' }}>
             <Card.Body>
                 <Card.Title>Superstitious beliefs</Card.Title>
@@ -27,6 +28,7 @@ export default function UserHome(){
                 <Button variant="primary">Go to chat</Button>
             </Card.Body>
             </Card>
+            </div>
         </div>
     );
     
