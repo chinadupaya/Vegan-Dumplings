@@ -1,0 +1,10 @@
+.card-container{
+    display: flex;
+    margin-top:1em;
+}
+.card{
+    margin:1em;
+}
+.btn{
+    margin:1em;
+}

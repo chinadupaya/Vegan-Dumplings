@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap');
+a.navbar-brand{
+    font-family: 'Odibee Sans' ;
+    font-size:2rem
+}
+.UserNavbar{
+    background-color: #1ce6d2;
+}

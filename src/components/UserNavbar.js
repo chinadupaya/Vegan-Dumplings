@@ -1,16 +1,23 @@
 import React, {Component} from 'react';
-import {Navbar, Nav }from 'react-bootstrap';
+import '../stylesheets/UserNavbar.css'
+import {Navbar, Nav, FormControl, Button, Form }from 'react-bootstrap';
 
 export default function UserNavbar(){
     return(
         <div className="UserNavbar">
-            <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="/home">Skultura</Navbar.Brand>
+            <Navbar expand="lg">
+            <Navbar.Brand href="/home">SKULTURA</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-                <Nav.Link href="/home">View Convos</Nav.Link>
+                <Nav.Link href="/home">View All Chats</Nav.Link>
+                <Nav.Link href="/chat"></Nav.Link>
             </Nav>
+
+            <Form inline>
+                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                <a href="/search"><Button variant="secondary">Search</Button></a>
+                </Form>
 
             </Navbar.Collapse>
             </Navbar>

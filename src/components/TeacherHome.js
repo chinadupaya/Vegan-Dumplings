@@ -1,11 +1,20 @@
 import React, {useState} from 'react';
-import {Tabs, Tab, Button, Card, Modal} from 'react-bootstrap';
-
+import {Tabs, Tab, Button, Card, Modal, Form, FormControl} from 'react-bootstrap';
+import '../stylesheets/TeacherHome.css';
 export default function TeacherHome(){
     const [show, setShow] = useState(false);
+    const [disabled, setDisabled] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    function handleRadioClick(x) {
+        if (x === "Open"){
+            setDisabled(true);
+        }else{
+            setDisabled();
+        }
+    }
     return(
 
         <div className="TeacherHome">
@@ -17,22 +26,38 @@ export default function TeacherHome(){
                 <Form>
                     <Form.Group controlId="formBasicChannel">
                         <Form.Label>Channel Topic</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Control type="text" placeholder="Enter channel topic" />
                         <Form.Text className="text-muted">
                             Make a descriptive title for your channel topic.
                         </Form.Text>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                    <Form.Group controlId="formBasic">
+                        <Form.Label>Description</Form.Label>
+                        <FormControl as="textarea" rows="3"/>
                     </Form.Group>
-                    <Form.Group controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Check me out" />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
+                    <Form.Row>
+                        <Form.Group controlId="formBasicCheckbox">
+                        <Form.Check
+                        
+                        type="radio"
+                        label="Make visible to all"
+                        name="formHorizontalRadios"
+                        id="formHorizontalRadios1"
+                        onClick={()=>handleRadioClick("Open")}
+                        />
+                        <div>
+                        <Form.Check
+                        md="4"
+                        type="radio"
+                        label="Send invite to class"
+                        name="formHorizontalRadios"
+                        id="formHorizontalRadios2"
+                        onClick={()=>handleRadioClick("Close")}
+                        /> <Form.Control  md="4" type="text" placeholder="Enter classroom code" disabled={disabled}/>
+                        </div>
+                        </Form.Group>
+                    </Form.Row>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
@@ -40,16 +65,19 @@ export default function TeacherHome(){
                     Close
                 </Button>
                 <Button variant="primary" onClick={handleClose}>
-                    Save Changes
+                    Add
                 </Button>
                 </Modal.Footer>
             </Modal>
             <Tabs defaultActiveKey="Class1" id="uncontrolled-tab-example">
                 <Tab eventKey="Class1" title="Class 1">
                     <Button variant ="info" onClick={handleShow}>Add new channel</Button>
+                    <div class="card-container">
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>Superstitious beliefs</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">CCNHS2019-9-A</Card.Subtitle>
+                            
                             <Card.Text>
                             Discuss with Grade 9 students from Cebu City National Science High School on the superstitious beliefs in their community.
                             </Card.Text>
@@ -59,18 +87,23 @@ export default function TeacherHome(){
                         <Card style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>Family values</Card.Title>
+
+                            <Card.Subtitle className="mb-2 text-muted">DCHS2019-8-A</Card.Subtitle>
                             <Card.Text>
                             Discuss with students from Davao City High School on their family values they believe are unique to their area.
                             </Card.Text>
                             <Button variant="primary">Go to chat</Button>
                         </Card.Body>
                         </Card>
+                    </div>
                 </Tab>
                 <Tab eventKey="Class2" title="Class 2">
                     <Button variant ="info" onClick={handleShow}>Add new channel</Button>
+                    <div class="card-container">
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>Superstitious beliefs</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">CCNHS2019-9-B</Card.Subtitle>
                             <Card.Text>
                             Discuss with Grade 9 students from Cebu City National Science High School on the superstitious beliefs in their community.
                             </Card.Text>
@@ -80,18 +113,22 @@ export default function TeacherHome(){
                         <Card style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>Family values</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">DCHS2019-8-B</Card.Subtitle>
                             <Card.Text>
                             Discuss with students from Davao City High School on their family values they believe are unique to their area.
                             </Card.Text>
                             <Button variant="primary">Go to chat</Button>
                         </Card.Body>
                         </Card>
+                        </div>
                 </Tab>
-                <Tab eventKey="CLass3" title="Class 3">
+                <Tab eventKey="Class3" title="Class 3">
                     <Button variant ="info" onClick={handleShow}>Add new channel</Button>
+                    <div class="card-container">
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>Superstitious beliefs</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">CCNHS2019-9-C</Card.Subtitle>
                             <Card.Text>
                             Discuss with Grade 9 students from Cebu City National Science High School on the superstitious beliefs in their community.
                             </Card.Text>
@@ -101,12 +138,15 @@ export default function TeacherHome(){
                         <Card style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>Family values</Card.Title>
+
+                            <Card.Subtitle className="mb-2 text-muted">DCHS2019-8-C</Card.Subtitle>
                             <Card.Text>
                             Discuss with students from Davao City High School on their family values they believe are unique to their area.
                             </Card.Text>
                             <Button variant="primary">Go to chat</Button>
                         </Card.Body>
                         </Card>
+                        </div>
                 </Tab>
             </Tabs>
             

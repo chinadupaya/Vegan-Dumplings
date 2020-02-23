@@ -5,6 +5,8 @@ export default function UserHome(){
     return(
 
         <div className = "UserHome">
+            <h3>Juan Dela Cruz</h3>
+            <h5>My Channels</h5>
             <Card style={{ width: '18rem' }}>
             <Card.Body>
                 <Card.Title>Superstitious beliefs</Card.Title>

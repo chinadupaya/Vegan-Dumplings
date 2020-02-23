@@ -1,0 +1,17 @@
+div.list-group-item{
+    display: flex;
+}
+div.list-group-item div{
+    padding:1em;
+}
+.school-name{
+    font-weight: bolder;
+}
+.grade-section{
+    color: rgb(170, 170, 170);
+}
+
+div.list-group-item button{
+    position:absolute; right:0;
+    margin-right:1.5em;
+}
