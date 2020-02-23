@@ -26,6 +26,7 @@ render() {
         ...this.props.style,
         ...styles.container,
         }}
+        className="MessageList"
     >
         <ul style={styles.ul}>
         {this.props.messages.map((message, index) => (

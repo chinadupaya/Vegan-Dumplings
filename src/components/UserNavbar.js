@@ -14,12 +14,13 @@ export default function UserNavbar(){
                 <Nav.Link href="/home">Channels</Nav.Link>
                 <Nav.Link href="/chat"></Nav.Link>
                 <Nav.Link href="/search">Search</Nav.Link>
+                <Nav.Link>
+                <Bell size={30}/>
+            </Nav.Link>
             </Nav>
 
             </Navbar.Collapse>
-            <Nav.Link>
-                <Bell size={30}/>
-            </Nav.Link>
+
             </Navbar>
         </div>
     )

@@ -84,11 +84,12 @@
    render() {
     const styles = {
                container: {
-                 height: '100vh',
+                 height: '90vh',
                  display: 'flex',
                  flexDirection: 'column',
                },
                chatContainer: {
+                 height:'80%',
                  display: 'flex',
                  flex: 1,
                },
